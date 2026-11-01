@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>ScoreForge</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">ScoreForge</div>
+    <button id="btn-open">Open audio…</button>
+    <span id="file-name" class="file-name">No file loaded</span>
+
+    <div class="group">
+      <label>Tempo <input id="in-tempo" type="number" min="30" max="300" value="120" /></label>
+      <label>Beats <input id="in-beats" type="number" min="1" max="16" value="4" /></label>
+      <label>Unit
+        <select id="in-unit">
+          <option>2</option><option selected>4</option><option>8</option><option>16</option>
+        </select>
+      </label>
+      <label>Algorithm
+        <select id="in-algo">
+          <option value="YIN" selected>YIN (melody)</option>
+          <option value="AMDF">AMDF</option>
+          <option value="DynamicWavelet">DynamicWavelet</option>
+          <option value="ACF2PLUS">Autocorrelation</option>
+        </select>
+      </label>
+      <label><input id="in-vocal" type="checkbox" /> Vocal reduce</label>
+      <label><input id="in-vocal-only" type="checkbox" /> Vocal only (center isolate)</label>
+    </div>
+
+    <button id="btn-transcribe" disabled>Transcribe</button>
+    <span id="status" class="status"></span>
+  </header>
+
+  <main class="main">
+    <nav class="tabs">
+      <button class="tab active" data-tab="roll">Piano roll</button>
+      <button class="tab" data-tab="score">Sheet music</button>
+      <button class="tab" data-tab="info">Readme</button>
+    </nav>
+
+    <section class="tab-panel active" data-panel="roll">
+      <div class="roll-toolbar">
+        <label>Tool
+          <select id="roll-tool">
+            <option value="select">Select / move</option>
+            <option value="draw">Draw</option>
+            <option value="erase">Erase</option>
+          </select>
+        </label>
+        <label>Instrument
+          <select id="roll-instrument"></select>
+        </label>
+        <button id="btn-add-track">+ Track</button>
+        <button id="btn-del-track">− Track</button>
+        <label>Snap
+          <select id="roll-snap">
+            <option value="1">1/1</option>
+            <option value="0.5">1/2</option>
+            <option value="0.25">1/4</option>
+            <option value="0.125" selected>1/8</option>
+            <option value="0.0625">1/16</option>
+            <option value="0">off</option>
+          </select>
+        </label>
+        <label>Zoom
+          <input id="roll-zoom" type="range" min="40" max="400" value="120" />
+        </label>
+        <span class="spacer"></span>
+        <div class="tracks" id="tracks-list"></div>
+      </div>
+      <div class="roll-wrap">
+        <canvas id="roll-canvas"></canvas>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-panel="score">
+      <div class="score-toolbar">
+        <label>Track
+          <select id="score-track"></select>
+        </label>
+        <label>Clef
+          <select id="score-clef">
+            <option value="treble" selected>Treble</option>
+            <option value="bass">Bass</option>
+            <option value="alto">Alto</option>
+            <option value="tenor">Tenor</option>
+          </select>
+        </label>
+        <label>Key
+          <select id="score-key">
+            <option>C</option><option>G</option><option>D</option><option>A</option>
+            <option>E</option><option>B</option><option>F#</option>
+            <option>F</option><option>Bb</option><option>Eb</option>
+            <option>Ab</option><option>Db</option><option>Gb</option>
+          </select>
+        </label>
+        <button id="btn-rerender">Re-render</button>
+      </div>
+      <div id="score-area" class="score-area"></div>
+    </section>
+
+    <section class="tab-panel" data-panel="info">
+      <div class="readme" id="readme-body"></div>
+    </section>
+  </main>
+
+  <footer class="transport">
+    <button id="btn-play">▶</button>
+    <button id="btn-stop">■</button>
+    <span id="pos">0.00 / 0.00s</span>
+    <input id="pos-slider" type="range" min="0" max="100" value="0" step="0.1" />
+    <label>Vol <input id="vol" type="range" min="0" max="1" step="0.01" value="0.8" /></label>
+    <span class="spacer"></span>
+    <button id="btn-export-midi">Export MIDI</button>
+    <button id="btn-export-musicxml">Export MusicXML</button>
+    <button id="btn-export-pdf">Print → PDF</button>
+  </footer>
+
+  <script>window.module = window.module || {}</script>
+  <script src="renderer/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{
+  "name": "scoreforge",
+  "version": "0.1.0",
+  "description": "Best-shot audio-to-sheet-music with full MIDI editing, playback, and printable scores. No AI.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "build:linux": "electron-builder --linux AppImage",
+    "build:mac": "electron-builder --mac dmg",
+    "build:win": "electron-builder --win nsis",
+    "build:all": "electron-builder -mwl"
+  },
+  "devDependencies": {
+    "electron": "^32.1.0",
+    "electron-builder": "^25.0.5"
+  },
+  "dependencies": {
+    "@tonejs/midi": "^2.0.28",
+    "pitchfinder": "^2.3.2",
+    "tone": "^15.0.4",
+    "vexflow": "^4.2.5"
+  },
+  "build": {
+    "appId": "com.scoreforge.app",
+    "productName": "ScoreForge",
+    "files": [
+      "**/*",
+      "!**/*.map",
+      "!**/node_modules/*/{README.md,LICENSE,LICENSE.*,CHANGELOG.*,*.ts,*.tsx}"
+    ],
+    "linux": {
+      "target": ["AppImage"],
+      "category": "AudioVideo",
+      "artifactName": "ScoreForge-${version}.${ext}"
+    },
+    "mac": {
+      "target": ["dmg"],
+      "category": "public.app-category.music",
+      "artifactName": "ScoreForge-${version}.${ext}"
+    },
+    "win": {
+      "target": ["nsis"],
+      "artifactName": "ScoreForge-Setup-${version}.${ext}"
+    }
+  }
+}
