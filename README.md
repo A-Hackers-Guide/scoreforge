@@ -1,5 +1,8 @@
 # ScoreForge
 
+[![Download ScoreForge](https://img.shields.io/sourceforge/dt/ahg-scoreforge.svg?label=SourceForge%20downloads)](https://sourceforge.net/projects/ahg-scoreforge/files/latest/download) [![Download ScoreForge](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/ahg-scoreforge/files/latest/download)
+
+
 Best-shot audio-to-sheet-music with a full MIDI editor, playback, and
 printable scores. **No AI anywhere in the pipeline** — pure classical DSP.
 
